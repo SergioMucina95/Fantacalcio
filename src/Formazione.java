@@ -13,17 +13,19 @@ String s="milan";
 String []a;
 Squadre sq;
 Squadre casa;
+Socket socke;
 
 
     /**
      * Creates new form Formazione
      */
-    public Formazione() {
+    public Formazione(Socket socke) {
         try{
         System.out.println("chiamato");
         initComponents();
         this.setSize(580,490);
         this.setLocation(10,100);
+        this.socke=socke;
         sfondo2.setBackground(java.awt.Color.green);
         sfondo2.setVisible(false);
         BSalva.setVisible(false);
@@ -416,7 +418,7 @@ Squadre casa;
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[],Socket socke) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -443,7 +445,7 @@ Squadre casa;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Formazione().setVisible(true);
+                new Formazione(socke).setVisible(true);
             }
         });
     }
@@ -484,13 +486,13 @@ public void vediTutto(){
 }
 
 public void cmbTutto()throws Exception{
-    Socket s = new Socket("localhost",15000);
-    System.out.println("Client connesso");
-    DataOutputStream esterno = new DataOutputStream(s.getOutputStream());
+   // Socket s = new Socket("localhost",15000);
+    //System.out.println("Client connesso");
+    DataOutputStream esterno = new DataOutputStream(socke.getOutputStream());
     esterno.write(0);
-    DataOutputStream extern = new DataOutputStream(s.getOutputStream());
+    DataOutputStream extern = new DataOutputStream(socke.getOutputStream());
     ObjectOutputStream out = new ObjectOutputStream(extern);
-    DataInputStream interno = new DataInputStream(s.getInputStream());
+    DataInputStream interno = new DataInputStream(socke.getInputStream());
     ObjectInputStream in = new ObjectInputStream(interno);
     System.out.println("post dichiarazioni");
       int dimensione=interno.read();

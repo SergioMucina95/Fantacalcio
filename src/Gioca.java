@@ -1,22 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.io.*;
+import java.net.*;
 
-/**
- *
- * @author Utente
- */
 public class Gioca extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Gioca
-     */
-    public Gioca() {
+Socket s;
+Squadre titolari;
+    public Gioca(Socket s) {
+        try{
         initComponents();
+        this.setSize(600,500);
+        this.s=s;
+        titolari=new Squadre();
+        this.voto();
+    }catch(Exception e){System.out.println(e.getMessage());}
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +37,9 @@ public class Gioca extends javax.swing.JFrame {
         G9 = new javax.swing.JLabel();
         G10 = new javax.swing.JLabel();
         G11 = new javax.swing.JLabel();
+        Bclassifica = new javax.swing.JButton();
+        Bhome = new javax.swing.JButton();
+        G12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
@@ -50,62 +50,92 @@ public class Gioca extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(60, 30, 90, 30);
 
+        CmbSquadra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CmbSquadraActionPerformed(evt);
+            }
+        });
         jPanel1.add(CmbSquadra);
         CmbSquadra.setBounds(160, 30, 80, 30);
 
         G1.setText("G1");
         jPanel1.add(G1);
-        G1.setBounds(170, 90, 40, 14);
+        G1.setBounds(30, 80, 130, 20);
 
         G2.setText("G2");
         jPanel1.add(G2);
-        G2.setBounds(50, 130, 20, 20);
+        G2.setBounds(30, 110, 160, 20);
 
         G3.setText("G3");
         jPanel1.add(G3);
-        G3.setBounds(130, 130, 13, 14);
+        G3.setBounds(230, 80, 180, 14);
 
         G4.setText("G4");
         jPanel1.add(G4);
-        G4.setBounds(210, 120, 13, 30);
+        G4.setBounds(230, 100, 160, 30);
 
         G5.setText("G5");
         jPanel1.add(G5);
-        G5.setBounds(300, 120, 13, 20);
+        G5.setBounds(30, 140, 170, 20);
 
         G6.setText("G6");
         jPanel1.add(G6);
-        G6.setBounds(80, 170, 13, 20);
+        G6.setBounds(230, 140, 170, 20);
 
         G7.setText("G7");
         jPanel1.add(G7);
-        G7.setBounds(160, 170, 13, 20);
+        G7.setBounds(30, 170, 170, 20);
 
         G8.setText("G8");
         jPanel1.add(G8);
-        G8.setBounds(270, 160, 13, 30);
+        G8.setBounds(230, 170, 140, 30);
 
         G9.setText("G9");
         jPanel1.add(G9);
-        G9.setBounds(110, 210, 13, 14);
+        G9.setBounds(30, 200, 160, 30);
 
         G10.setText("G10");
         jPanel1.add(G10);
-        G10.setBounds(210, 210, 20, 14);
+        G10.setBounds(230, 210, 140, 20);
 
         G11.setText("G11");
         jPanel1.add(G11);
-        G11.setBounds(150, 250, 19, 14);
+        G11.setBounds(30, 240, 160, 30);
+
+        Bclassifica.setText("classifica");
+        jPanel1.add(Bclassifica);
+        Bclassifica.setBounds(40, 330, 110, 60);
+
+        Bhome.setText("Home");
+        Bhome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BhomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Bhome);
+        Bhome.setBounds(230, 330, 110, 60);
+
+        G12.setText("SQ");
+        jPanel1.add(G12);
+        G12.setBounds(230, 250, 170, 20);
 
         getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void CmbSquadraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbSquadraActionPerformed
+         // TODO add your handling code here:
+    }//GEN-LAST:event_CmbSquadraActionPerformed
+
+    private void BhomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BhomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BhomeActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[],Socket s) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -132,16 +162,19 @@ public class Gioca extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gioca().setVisible(true);
+                new Gioca(s).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Bclassifica;
+    private javax.swing.JButton Bhome;
     private javax.swing.JComboBox CmbSquadra;
     private javax.swing.JLabel G1;
     private javax.swing.JLabel G10;
     private javax.swing.JLabel G11;
+    private javax.swing.JLabel G12;
     private javax.swing.JLabel G2;
     private javax.swing.JLabel G3;
     private javax.swing.JLabel G4;
@@ -153,4 +186,40 @@ public class Gioca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+public void voto(){
+
+    try{
+ DataOutputStream out=new DataOutputStream(s.getOutputStream());
+ out.write(1);
+ 
+ DataInputStream in=new DataInputStream(s.getInputStream());
+  titolari.carica("milan");
+ for(int i=0;i<titolari.getDim();i++){
+      titolari.GetCal(i).setVoto(in.readFloat());
+      System.out.println(titolari.GetCal(i).getVoto());  
+      }
+   }catch(Exception e){System.out.println(e.getMessage());}
+
+  G1.setText(""+titolari.GetCal(0).getCognome()+": "+titolari.GetCal(0).getVoto());
+  G2.setText(""+titolari.GetCal(1).getCognome()+": "+titolari.GetCal(1).getVoto());
+  G3.setText(""+titolari.GetCal(2).getCognome()+": "+titolari.GetCal(2).getVoto());
+  G4.setText(""+titolari.GetCal(3).getCognome()+": "+titolari.GetCal(3).getVoto());
+  G5.setText(""+titolari.GetCal(4).getCognome()+": "+titolari.GetCal(4).getVoto());
+  G6.setText(""+titolari.GetCal(5).getCognome()+": "+titolari.GetCal(5).getVoto());
+  G7.setText(""+titolari.GetCal(6).getCognome()+": "+titolari.GetCal(6).getVoto());
+  G8.setText(""+titolari.GetCal(7).getCognome()+": "+titolari.GetCal(7).getVoto());
+  G9.setText(""+titolari.GetCal(8).getCognome()+": "+titolari.GetCal(8).getVoto());
+  G10.setText(""+titolari.GetCal(9).getCognome()+": "+titolari.GetCal(9).getVoto());
+  G11.setText(""+titolari.GetCal(10).getCognome()+": "+titolari.GetCal(10).getVoto());
+  G12.setText("voto squadra: "+titolari.votoSquadra());
+
 }
+
+
+
+
+}
+
+
+
